@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
-import Singup from './pages/Singup';
-import Login from './pages/Login'
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Singup />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<Home />} />
       </Routes>
       </BrowserRouter>

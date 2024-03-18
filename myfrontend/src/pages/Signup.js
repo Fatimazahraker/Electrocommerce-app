@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import './Signup.css';
 
-function Singup() {
+function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     return (
@@ -29,10 +30,10 @@ function Singup() {
                         </p>
                     </Form>
                 </Col>
-                <Col md={6} className="singup__image--container"></Col>
+                <Col md={6} className="signup__image--container"></Col>
             </Row>
         </Container>
   );
 }
 
-export default Singup;
+export default Signup;
