@@ -1,10 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import productSlice from './features/productSlice';
-import userSlice from './features/userSlice';
-import appApi from './services/appApi';
+import { configureStore } from "@reduxjs/toolkit";
+import productSlice from "./features/productSlice";
+import userSlice from "./features/userSlice";
+import appApi from "./services/appApi";
+
+//persit our store
+import storage from "redux-persist/lib/storage";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import thunk from "redux-thunk";
 
 //reducers
 const reducer = combineReducers({
@@ -14,17 +17,19 @@ const reducer = combineReducers({
 });
 
 const persistConfig = {
-    key: 'root',
+    key: "root",
     storage,
-    blacklist: [appApi.reducerPath, "products"],
+    blackList: [appApi.reducerPath, "products"],
 };
 
-// Persist our store
+// persist our store
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-// Creating the store
+// creating the store
+
 const store = configureStore({
     reducer: persistedReducer,
+    middleware: [thunk, appApi.middleware],
 });
 
 export default store;
