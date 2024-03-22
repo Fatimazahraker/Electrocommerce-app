@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { useLoginMutation } from '../services/appApi';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, { error, isLoading, isError }] = useLoginMutation();
+  
+  function handleLogin(e) {
+    e.preventDefault();
+    login({ email, password });
+  }
 
-  function handleSubmit() {}
   return (
     <Container>
         <Row>
             <Col md={6} className='login__form--container'>
-                <Form style={{ width: "100%" }}>
+                <Form style={{ width: "100%" }} onSubmit={handleLogin}>
                   <h1>Login to your account</h1>
+                  {isError && <Alert variant="danger">{error.data}</Alert>}
                   <Form.Group>
                     <Form.Label>Email Adress</Form.Label>
                     <Form.Control type="email" placeholder="Enter your email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
@@ -24,7 +31,7 @@ function Login() {
                   </Form.Group>
                   
                   <Form.Group>
-                    <Button type="submit">Login</Button>
+                    <Button type="submit" disabled={isLoading}>Login</Button>
                   </Form.Group>
                   <p>
                     You don't have an account? <Link to="/signup">Create account</Link>{" "}
