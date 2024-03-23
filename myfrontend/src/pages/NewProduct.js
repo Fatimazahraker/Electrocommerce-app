@@ -46,9 +46,8 @@ function handleSubmit(e) {
   function showWidget() {
     const widget = window.cloudinary.createUploadWidget(
       {
-        cloudName: "dvc52xluq",
-        uploadPreset: "shxznbgl"
-        
+        cloudName: "dpslbe5xm",
+        uploadPreset: "zecbbtbx"
       },
       
       (error, result) => {
@@ -84,7 +83,7 @@ function handleSubmit(e) {
                     <Form.Control type="number" placeholder="Price($)" value={price} required onChange={(e) => setPrice(e.target.value)}/>
                   </Form.Group>
 
-                  <Form.Group className="mb-3" nChange={(e) => setCategory(e.target.value)}>
+                  <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
                     <Form.Label>Category</Form.Label>
                     <Form.Select>
                       <option disabled selected>

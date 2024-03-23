@@ -9,14 +9,6 @@ cloudinary.config({
 })
 
 
-// Handle preflight OPTIONS request
-router.options('/:public_id', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.status(200).send();
-});
-
 router.delete('/:public_id', async(req, res)=> {
   const {public_id} = req.params;
   try {
@@ -26,7 +18,6 @@ router.delete('/:public_id', async(req, res)=> {
   } catch (e) {
       res.status(400).send(e.message)
   }
-  console.log('Deleting Image Public ID:', public_id);
 })
 
 
