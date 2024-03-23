@@ -26,7 +26,7 @@ function Home() {
                 <h2>Categories</h2>
                 <Row>
                     {categories.map((category) => (
-                        <LinkContainer to={`/category/${category.name.toLocaleLowerCase()}`}>
+                        <LinkContainer key={category.id} to={`/category/${category.name.toLocaleLowerCase()}`}>
                             <Col md={4}>
                                 <div style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${category.img})`, gap: "10px" }} className="category-tile">
                                     {category.name}

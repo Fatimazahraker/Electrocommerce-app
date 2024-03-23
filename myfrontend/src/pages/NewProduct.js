@@ -32,9 +32,11 @@ function NewProduct() {
 function handleSubmit(e) {
   e.preventDefault();
   if (!name || !description || !price || !category || !images.length) {
-      return alert("Please fill out all the fields");
+    return alert("Please fill out all the fields");
   }
-  createProduct({ name, description, price, category, images }).then(({ data }) => {
+
+  createProduct({ name, description, price, category, images }).then(({data}) => {
+      console.log(data);
       if (data.length > 0) {
           setTimeout(() => {
               navigate("/");
@@ -70,7 +72,7 @@ function handleSubmit(e) {
                   {isError && <Alert variant="danger">{error.data}</Alert>}
                   <Form.Group className="mb-3">
                     <Form.Label>Product name</Form.Label>
-                    <Form.Control type="email" placeholder="Enter the product name" value={name} required onChange={(e) => setName(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Enter the product name" value={name} required onChange={(e) => setName(e.target.value)}/>
                   </Form.Group>
                   
                   <Form.Group className="mb-3">
@@ -86,7 +88,7 @@ function handleSubmit(e) {
                   <Form.Group className="mb-3" onChange={(e) => setCategory(e.target.value)}>
                     <Form.Label>Category</Form.Label>
                     <Form.Select>
-                      <option disabled selected>
+                      <option disabled selected value="SelectOne">
                         -- Select One --
                       </option>
                       <option value="technology">technology</option>
@@ -100,7 +102,7 @@ function handleSubmit(e) {
                     <Button type="button" onClick={showWidget}>Upload Images</Button>
                     <div className='images-preview-container'>
                       {images.map((image) => (
-                        <div className='image-preview'>
+                        <div key={image.public_id} className='image-preview'>
                           <img src={image.url} />
                             <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>
                         </div>

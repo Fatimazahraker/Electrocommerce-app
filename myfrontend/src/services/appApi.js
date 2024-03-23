@@ -22,11 +22,11 @@ export const appApi = createApi({
             }),
         }),
             // creating product
-            createProduct: builder.mutation({
+        createProduct: builder.mutation({
             query: (product) => ({
-                url: "/products",
-                method: "POST",
-                body: product,
+            url: "/products",
+            method: "POST",
+            body: product,
             }),
         })
     }),

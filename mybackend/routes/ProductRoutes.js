@@ -15,14 +15,14 @@ router.get('/', async(req, res) => {
 })
 
 //create product
-router.post('/', async(req, res) => {
-    try{
-        const { name, discription, price, category, images: pictures } = req.body;
-        const product = await Product.create({name, discription, price, category, pictures});
-        const products = await Product.find();
-        res.status(200).json(products);
+router.post('/', async(req, res)=> {
+    try {
+      const {name, description, price, category, images: pictures} = req.body;
+      const product = await Product.create({name, description, price, category, pictures});
+      const products = await Product.find();
+      res.status(201).json(products);
     } catch (e) {
-        res.status(400).send(e.message);
+      res.status(400).send(e.message);
     }
 })
 
@@ -30,8 +30,8 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async(req, res) => {
     const {id} = req.params;
     try {
-        const { name, discription, price, category, images: pictures } = req.body;
-        const product = await Product.findByIdAndUpdate(id, {name, discription, price, category, pictures});
+        const { name, description, price, category, images: pictures } = req.body;
+        const product = await Product.findByIdAndUpdate(id, {name, description, price, category, pictures});
         const products = await Product.find();
         res.status(200).json(products);
     } catch (e) {
