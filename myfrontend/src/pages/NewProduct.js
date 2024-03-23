@@ -48,7 +48,9 @@ function handleSubmit(e) {
       {
         cloudName: "dvc52xluq",
         uploadPreset: "shxznbgl"
+        
       },
+      
       (error, result) => {
         if(!error && result.event === 'success') {
           setImages((prev) => [...prev, {url: result.info.url, public_id: result.info.public_id}])
@@ -56,6 +58,7 @@ function handleSubmit(e) {
       }
     );
     widget.open();
+    
   }
 
   return (
@@ -100,7 +103,7 @@ function handleSubmit(e) {
                       {images.map((image) => (
                         <div className='image-preview'>
                           <img src={image.url} />
-                          {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
+                            <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>
                         </div>
                       ))}
                     </div>
