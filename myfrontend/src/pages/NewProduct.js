@@ -5,6 +5,7 @@ import { useCreateProductMutation } from '../services/appApi'
 import { useNavigate } from 'react-router-dom';
 import { Col, Container, Row, Alert, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import axios from "../axios";
 
 function NewProduct() {
   const [name, setName] = useState("");
@@ -17,11 +18,36 @@ function NewProduct() {
   const [createProduct, { error, isLoading, isError, isSuccess }] = useCreateProductMutation();
 
 
+  function handleRemoveImg(imgObj) {
+    setImgToRemove(imgObj.public_id);
+    axios
+        .delete(`/images/${imgObj.public_id}/`)
+        .then((res) => {
+            setImgToRemove(null);
+            setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+        })
+        .catch((e) => console.log(e));
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  if (!name || !description || !price || !category || !images.length) {
+      return alert("Please fill out all the fields");
+  }
+  createProduct({ name, description, price, category, images }).then(({ data }) => {
+      if (data.length > 0) {
+          setTimeout(() => {
+              navigate("/");
+          }, 1500);
+      }
+  });
+}
+
   function showWidget() {
     const widget = window.cloudinary.createUploadWidget(
       {
-        cloudName: "dpslbe5xm",
-        uploadPreset: "zecbbtbx"
+        cloudName: "dvc52xluq",
+        uploadPreset: "shxznbgl"
       },
       (error, result) => {
         if(!error && result.event === 'success') {
@@ -36,8 +62,8 @@ function NewProduct() {
   <Container>
     <Row>
       <Col md={6} className='new-product__form--container'>
-          <Form style={{ width: "100%" }}>
-                  <h1>Create a product</h1>
+        <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
+                  <h1 className="mt-4">Create a product</h1>
                   {isSuccess && <Alert variant="success">Product created with seccess</Alert>}
                   {isError && <Alert variant="danger">{error.data}</Alert>}
                   <Form.Group className="mb-3">
@@ -74,7 +100,7 @@ function NewProduct() {
                       {images.map((image) => (
                         <div className='image-preview'>
                           <img src={image.url} />
-                          {}
+                          {imgToRemove != image.public_id && <i className="fa fa-times-circle" onClick={() => handleRemoveImg(image)}></i>}
                         </div>
                       ))}
                     </div>
