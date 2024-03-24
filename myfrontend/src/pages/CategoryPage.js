@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import ProductPreview from "../components/ProductPreview";
-//import "./CategoryPage.css";
+import "./CategoryPage.css";
 //import Pagination from "../components/Pagination";
 
 
@@ -53,9 +53,12 @@ function CategoryPage() {
                 <Container>
                     <Row>
                         <Col md={{ span: 10, offset: 1 }}>
+                            <div className="d-flex justify-content-center align-items-center flex-wrap">
                             {productsSearch.map((product) => (
                                 <ProductPreview {...product} />
                             ))}
+
+                            </div>
                         </Col>
                     </Row>
                 </Container>
