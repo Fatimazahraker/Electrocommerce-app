@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProducts } from '../features/productSlice';
+import axios from '../axios';
 import { Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import categories from "../categories";
 import "./Home.css";
+import ProductPreview from '../components/ProductPreview';
 
 function Home() {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const lastProducts = products.slice(0, 8);
+
+  useEffect(() => {
+    axios.get('/products').then(({data}) => dispatch(updateProducts(data)));
+  }, []);
+
   return (
     <div>
       <img src=" https://res.cloudinary.com/learn-code-10/image/upload/v1653947013/yqajnhqf7usk56zkwqi5.png" className="home-banner" />
       <div className="featured-products-container container mt-4">
         <h2>Last products</h2>
         {/* last products here */}
+        {lastProducts.map((product) => (
+          <ProductPreview key={product._id} {...product} />
+        ))}
         <div>
             <Link to="/category/all" style={{ textAlign: "right", display: "block", textDecoration: "none" }}>
             See more {">>"}
