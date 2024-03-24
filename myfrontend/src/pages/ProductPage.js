@@ -29,7 +29,11 @@ function ProductPage() {
     if (!product) {
         return <Loading />;
     }
-   
+    const responsive = {
+        0: {items: 1},
+        568: {items: 1},
+        1024: {items: 1},
+    };
 
     const images = product.pictures.map((picture) => <img className="product__carousel--image" src={picture.url} onDragStart={handleDragStart} />);
 
@@ -57,9 +61,31 @@ function ProductPage() {
                     <p style={{ textAlign: "justify" }} className="py-3">
                         <strong>Description:</strong> {product.description}
                     </p>
-                    
+                    {user && !user.isAdmin && (
+                        <ButtonGroup style={{width: '90%'}}>
+                            <Form.Select size='lg' style={{ width: '40%', borderRadius: '0'}} >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </Form.Select>
+                            <Button size='lg'>Add to cart</Button>
+                        </ButtonGroup>
+                    )}
+                    {user && user.isAdmin && (
+                        <LinkContainer to={`/product/${product._id}/edit`}>
+                            <Button size='lg'>Edit Product</Button>
+                        </LinkContainer>
+                    )}
                 </Col>
             </Row>
+            <div className="ny-4">
+                <h2>Similar Products</h2>
+                <div className="d-flex justify-content-center align-items-center flex-wrap">
+                    <AliceCarousel mouseTracking items={similarProducts} responsive={responsive} controlsStrategy="alternate"/>
+                </div>
+            </div>
         </Container>
     );
 }
