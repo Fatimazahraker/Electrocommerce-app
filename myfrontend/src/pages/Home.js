@@ -12,7 +12,8 @@ import ProductPreview from '../components/ProductPreview';
 function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const lastProducts = products.slice(0, 8);
+  const reversedProducts = [...products].reverse();
+  const lastProducts = reversedProducts.slice(0, 8);
 
   useEffect(() => {
     axios.get('/products').then(({data}) => dispatch(updateProducts(data)));
@@ -24,9 +25,11 @@ function Home() {
       <div className="featured-products-container container mt-4">
         <h2>Last products</h2>
         {/* last products here */}
-        {lastProducts.map((product) => (
-          <ProductPreview key={product._id} {...product} />
-        ))}
+        <div className='d-flex justify-content-center flex-wrap'>
+          {lastProducts.map((product) => (
+            <ProductPreview key={product._id} {...product} />
+          ))}
+        </div>
         <div>
             <Link to="/category/all" style={{ textAlign: "right", display: "block", textDecoration: "none" }}>
             See more {">>"}
