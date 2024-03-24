@@ -31,8 +31,8 @@ function ProductPage() {
     }
     const responsive = {
         0: {items: 1},
-        568: {items: 1},
-        1024: {items: 1},
+        568: {items: 2},
+        1024: {items: 3},
     };
 
     const images = product.pictures.map((picture) => <img className="product__carousel--image" src={picture.url} onDragStart={handleDragStart} />);
