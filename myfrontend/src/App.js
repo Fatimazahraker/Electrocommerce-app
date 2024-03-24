@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { useSelector } from 'react-redux';
 import NewProduct from './pages/NewProduct';
+import ProductPage from "./pages/ProductPage";
 
 
 function App() {
