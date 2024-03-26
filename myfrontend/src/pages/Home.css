@@ -30,4 +30,11 @@ img.card-img-top.product-preview-img {
     max-width: 1200px;
     display: block;
     margin: 0 auto;
+    height: 600px;
 }
+.home-banner {
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+    height: 600px;
+  }
