@@ -57,6 +57,26 @@ UserSchema.statics.findByCredentials = async function(email, password) {
   throw new Error('invalid credentials');
 }
 
+UserSchema.statics.isPasswordValid = function(password) {
+  // Password must be at least 8 characters long
+  if (password.length < 8) {
+      return 'Password should be at least 8 characters long';
+  }
+
+  // Password must contain at least one uppercase letter
+  if (!/[A-Z]/.test(password)) {
+      return 'Password should contain at least one uppercase letter';
+  }
+
+  // Password must contain at least one special character
+  if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
+      return 'Password should contain at least one special character';
+  }
+
+  // Password meets all requirements
+  return undefined;
+};
+
 
 UserSchema.methods.toJSON = function(){
   const user = this;

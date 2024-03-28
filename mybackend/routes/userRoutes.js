@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const User = require('../models/User');
 
+
+
 /**
  * Route: POST /auth/signup
  * Description: Registers a new user
@@ -19,6 +21,14 @@ router.post('/signup', async (req, res) => {
         if (findUser) {
             return res.status(400).send('Email already exists');
         }
+
+        // Check if the password meets complexity requirements
+        const passwordError = User.isPasswordValid(password);
+        if (passwordError) {
+            return res.status(400).send(passwordError);
+        }
+
+        // If all checks pass, create the user
         const user = await User.create({ name, email, password });
         res.json(user);
     } catch (e) {
