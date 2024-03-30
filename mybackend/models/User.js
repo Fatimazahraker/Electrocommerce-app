@@ -5,13 +5,14 @@ const UserSchema = mongoose.Schema({
 
   name: {
     type: String,
-    required: true,
+    required: [true, 'is required']
   },
 
   email: {
     type: String,
     required: [true, 'is required'],
     unique: true,
+    index: true,
     validate: {
       validator: function(str){
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(str);
@@ -45,7 +46,44 @@ const UserSchema = mongoose.Schema({
 
   orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}]
 
-});
+}, {minimize: false});
+
+
+UserSchema.statics.findByCredentials = async function(email, password) {
+  const user = await User.findOne({email});
+  if(!user) throw new Error('invalid credentials');
+  const isSamePassword = bcrypt.compareSync(password, user.password);
+  if(isSamePassword) return user;
+  throw new Error('invalid credentials');
+}
+
+UserSchema.statics.isPasswordValid = function(password) {
+  // Password must be at least 8 characters long
+  if (password.length < 8) {
+      return 'Password should be at least 8 characters long';
+  }
+
+  // Password must contain at least one uppercase letter
+  if (!/[A-Z]/.test(password)) {
+      return 'Password should contain at least one uppercase letter';
+  }
+
+  // Password must contain at least one special character
+  if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
+      return 'Password should contain at least one special character';
+  }
+
+  // Password meets all requirements
+  return undefined;
+};
+
+
+UserSchema.methods.toJSON = function(){
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  return userObject;
+}
 
 
 //before saving => hash the password
