@@ -25,11 +25,11 @@ function CartPage() {
     return (
         <Container style={{ minHeight: "95vh" }} className="cart-container">
             <Row>
-                <Col md={7}>
+                <Col md={4}>
                     <h1 className="pt-2 h3">Shopping cart</h1>
                     {cart.length == 0 ? <Alert variant="info">Shopping cart is empty. Add products to your cart</Alert> : <div>Payment here</div>}
                 </Col>
-                <Col md={5}>
+                <Col md={8}>
                     {cart.length > 0 && (
                         <>
                             <Table responsive="sm" className="cart-table">
