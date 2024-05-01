@@ -1,7 +1,20 @@
-{
+{"name": "ecomern-yt-frontend",
+"version": "0.1.0",
+"private": true,
+"homepage": "https://Fatimazahraker.github.io/Electrocommerce-app",
+
   "dependencies": {
     "axios": "^1.6.8",
+    "gh-pages": "^6.1.1",
     "nodemon": "^3.1.0",
     "react-alice-carousel": "^2.8.0"
+  },
+
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build"
   }
+    
+
 }

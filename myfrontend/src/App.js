@@ -6,20 +6,24 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import NewProduct from './pages/NewProduct';
 import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
+import ThemeContext from './features/theme';
 
 
 
 
 function App() {
   const user = useSelector((state) => state.user);
+  const { dark } = useContext(ThemeContext);
+  
   return (
-    <div className="App">
+    <div className={`App-${dark ? 'dark' : 'light'}`}>
       <BrowserRouter>
         <ScrollToTop />
         <Navigation />

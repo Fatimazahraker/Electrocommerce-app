@@ -2,6 +2,7 @@
   "name": "ecomern-yt-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Fatimazahraker.github.io/Electrocommerce-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@stripe/react-stripe-js": "^1.8.1",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
+    "gh-pages": "^6.1.1",
     "react": "^18.1.0",
     "react-alice-carousel": "^2.6.1",
     "react-bootstrap": "^2.4.0",
@@ -26,6 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
