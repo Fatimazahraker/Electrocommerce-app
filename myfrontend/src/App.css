@@ -23,7 +23,48 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+#light {
+  background-color: rgb(247, 244, 244);
+}
 
+#dark {
+  background-color: #2f3436;
+}
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  padding: 10px;
+}
+.switch {
+  display: flex;
+  align-items: center;
+}
+#light .switch label {
+  color: black;
+  padding-right: 10px;
+}
+
+#dark .switch label {
+  color: white;
+  padding-right: 10px;
+}
+#dark .navigation {
+  background-color: #2f3436;
+
+  left: 0;
+  right: 0;
+}
+#light .navigation  {
+    background-color: #eef2f3;
+
+ left: 0;
+ right: 0;
+}
+#dark  .featured-products-heading h2 {
+ color: #eef2f3;
+}
 .App-link {
   color: #61dafb;
 }

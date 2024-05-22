@@ -66,10 +66,17 @@ export const appApi = createApi({
                 body,
             }),
         }),
+        createOrder: builder.mutation({
+            query: (body) => ({
+                url: "/orders",
+                method: "POST",
+                body,
+            }),
+        }),
 }),
 
 });
 
-export const { useSignupMutation, useLoginMutation, useCreateProductMutation, useAddToCartMutation, useRemoveFromCartMutation, useIncreaseCartProductMutation, useDecreaseCartProductMutation } = appApi;
+export const { useSignupMutation, useLoginMutation, useCreateProductMutation, useAddToCartMutation, useRemoveFromCartMutation, useIncreaseCartProductMutation, useDecreaseCartProductMutation, useCreateOrderMutation } = appApi;
 
 export default appApi;

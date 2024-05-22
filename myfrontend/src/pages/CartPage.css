@@ -1,5 +1,5 @@
-.fa-minus-circle,
-.fa-plus-circle {
+.fa-plus-circle,
+.fa-minus-circle {
     cursor: pointer;
     display: inline-block;
 }
@@ -7,7 +7,8 @@
 .fa-plus-circle {
     margin-left: 5px;
 }
-.fa-minus-circle{
+
+.fa-minus-circle {
     margin-right: 5px;
 }
 

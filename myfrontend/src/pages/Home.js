@@ -8,21 +8,21 @@ import { Link } from "react-router-dom";
 import categories from "../categories";
 import "./Home.css";
 import ProductPreview from '../components/ProductPreview';
-import ThemeContext from '../features/theme';
+
 
 function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const reversedProducts = [...products].reverse();
   const lastProducts = reversedProducts.slice(0, 8);
-  const { dark } = useContext(ThemeContext);
+ 
 
   useEffect(() => {
     axios.get('/products').then(({data}) => dispatch(updateProducts(data)));
   }, []);
 
   return (
-    <div className={dark ? 'dark-theme' : 'light-theme'}>
+    <div className={Home}>
       <img src=" https://res.cloudinary.com/dvc52xluq/image/upload/v1711494833/360_F_489280525_nISHfaWCctYBFlyYkTQUkzQwVOPWmyvp_xlql62.jpg" className="home-banner" />
       <div className="featured-products-container container mt-4">
         <h2>Last products</h2>

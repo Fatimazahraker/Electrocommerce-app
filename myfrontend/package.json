@@ -5,7 +5,7 @@
   "homepage": "https://Fatimazahraker.github.io/Electrocommerce-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
-    "@stripe/react-stripe-js": "^1.8.1",
+    "@stripe/react-stripe-js": "^1.16.5",
     "@stripe/stripe-js": "^1.31.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -21,10 +21,12 @@
     "react-router-bootstrap": "^0.26.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-switch": "^7.0.0",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "socket.io-client": "^4.5.1",
+    "stripe": "^15.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

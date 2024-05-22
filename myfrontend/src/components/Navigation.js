@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/userSlice";
 import { useContext, useState , useEffect } from 'react';
-import ThemeContext from '../features/theme';
+
 
 function Navigation() {
   const user = useSelector((state) => state.user);
@@ -13,19 +13,10 @@ function Navigation() {
 
   
     const [checked, setChecked] = useState(false);
-    const { dark, setDark, saveThemeToLocalStorage } = useContext(ThemeContext);
+    
+ 
   
-    useEffect(() => {
-      setChecked(!dark);
-    }, [dark]);
   
-    const handleChange = () => {
-      setChecked((prevChecked) => !prevChecked);
-      setDark((prevState) => {
-        saveThemeToLocalStorage(!prevState);
-        return !prevState;
-      });
-    }
     
  
 
@@ -36,23 +27,15 @@ function Navigation() {
 
 
   return (
-    <Navbar expand="lg" className={`bg-body-tertiary ${dark ? 'navbar-dark' : 'navbar-light'}`}>
+    <Navbar expand="lg" className={` navigation`}>
       <Container>
         <LinkContainer to="/">
           <Navbar.Brand>EcommerceElectro</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="ms-auto">
-            {/* Add theme toggle button */}
-            <div className='theme-toggler-container'>
-                <div className='theme-toggler'>
-                  <label>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                    <span className='slider'></span>
-                  </label>
-                </div>
-              </div>
+            
             {!user && (
                             <LinkContainer to="/login">
                                 <Nav.Link>Login</Nav.Link>

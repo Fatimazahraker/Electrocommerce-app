@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+
 .wrap {
     background-color: rgb(247, 244, 244);
     min-height: calc(100vh - 56px); /* Subtract the height of your navbar */
     padding-top: 56px; /* Adjust this value to include the height of your navbar */
   }
 
-.container1{
+.container2{
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -18,25 +19,25 @@
     margin: 0 auto;
 }
 
-.container1 p{
+.container2 p{
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
 
-.container1 span{
+.container2 span{
     font-size: 12px;
 }
 
-.container1 a{
+.container2 a{
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
-.container1 button{
+.container2 button{
     background-color: #2da0a8;
     color: #fff;
     font-size: 12px;
@@ -50,12 +51,12 @@
     cursor: pointer;
 }
 
-.container1 button.hidden{
+.container2 button.hidden{
     background-color: transparent;
     border-color: #fff;
 }
 
-.container1 form{
+.container2 form{
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -65,7 +66,7 @@
     height: 100%;
 }
 
-.container1 input{
+.container2 input{
     background-color: #eee;
     border: none;
     margin: 8px 0;
@@ -76,29 +77,24 @@
     outline: none;
 }
 
-.form-container1{
+.form-container2{
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
-
-
-
-.sign-up{
+.sign-in{
     left: 0;
     width: 50%;
-    opacity: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
-.container1 .sign-up{
-    transform: translateX(0);
-    opacity: 1;
-    z-index: 5;
-    animation: move 0.6s;
+.container2 .sign-in{
+    transform: translateX(100%);
 }
+
+
 
 @keyframes move{
     0%, 49.99%{
@@ -113,7 +109,7 @@
 
 
 
-.toggle-container1{
+.toggle-container2{
     position: absolute;
     top: 0;
     left: 50%;
@@ -121,17 +117,16 @@
     height: 100%;
     overflow: hidden;
     transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
+ 
     z-index: 1000;
-    transform: translateX(-50%);
 }
 
-.container1 .toggle-container1{
-    transform: translateX(0%);
-    border-radius: 150px 0px 0px 100PX;
+.container2 .toggle-container2{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
 }
 
-.toggle1{
+.toggle2{
     background-color: #2da0a8;
     height: 100%;
     background: linear-gradient(to right, #5c6bc0, #2da0a8);
@@ -144,11 +139,11 @@
     transition: all 0.6s ease-in-out;
 }
 
-.container1 .toggle1{
+.container2 .toggle{
     transform: translateX(50%);
 }
 
-.toggle-panel1{
+.toggle-panel2{
     position: absolute;
     width: 50%;
     height: 100%;
@@ -163,11 +158,15 @@
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
+
+
+
+
+.toggle-right{
+    right: 0;
     transform: translateX(0);
 }
 
-.container1 .toggle-left1{
-    transform: translateX(0);
+.container2 .toggle-right{
+   transform: translateX(0);
 }
-

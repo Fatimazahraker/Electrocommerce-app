@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Col, Container, Row, Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { useLoginMutation } from '../services/appApi';
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,33 +15,40 @@ function Login() {
   }
 
   return (
-    <Container>
-        <Row>
-            <Col md={6} className='login__form--container'>
-                <Form style={{ width: "100%" }} onSubmit={handleLogin}>
+  
+    <div className='wrap'>
+            <div class="container2" id="container2">
+              <div class={`form-container2 sign-in `}>
+                <Form  onSubmit={handleLogin}>
                   <h1>Login to your account</h1>
                   {isError && <Alert variant="danger">{error.data}</Alert>}
-                  <Form.Group>
-                    <Form.Label>Email Adress</Form.Label>
-                    <Form.Control type="email" placeholder="Enter your email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
-                  </Form.Group>
                   
-                  <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter your password" value={password} required onChange={(e) => setPassword(e.target.value)}/>
-                  </Form.Group>
+                 
+                    <input type="email" placeholder="Enter your email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" placeholder="Enter your password" value={password} required onChange={(e) => setPassword(e.target.value)}/>
+                 
                   
-                  <Form.Group>
+          
                     <Button type="submit" disabled={isLoading}>Login</Button>
-                  </Form.Group>
-                  <p>
-                    You don't have an account? <Link to="/signup">Create account</Link>{" "}
-                    </p>
+                  
+                 
                 </Form>
-            </Col>
-            <Col md={6} className="login__image--container"></Col>
-        </Row>
-    </Container>
+                </div>
+                <div class="toggle-container2">
+                  <div class="toggle2">
+                    
+                    <div class="toggle-panel2 toggle-right">
+                      <h1>Hello, Friend!</h1>
+                      <p>
+                        Register with your personal details to use all of site features this is login page
+                      </p>
+                      <button class="hidden" id="register"><Link to="/signup" style={{ color: 'white' }}>SIGN UP</Link></button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+   
   );
 }
 

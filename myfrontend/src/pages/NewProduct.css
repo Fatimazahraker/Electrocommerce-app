@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100px, 100%), 1fr));
     gap: 10px;
     margin-top: 40px;
+    
 }
 
 .image-preview {
@@ -35,5 +36,52 @@
     background-image: url(https://images.unsplash.com/photo-1652773899966-583e9d2f2fb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fHRlY2h8ZW58MHwxfDB8d2hpdGV8&auto=format&fit=crop&w=800&q=60);
     background-size: cover;
     background-position: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+.new-product-container {
+    padding: 20px;
     height: 100vh;
+  }
+  
+  .new-product-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    background-color: #fff;
+  }
+  
+  .images-preview-container {
+    margin-top: 10px;
+  }
+  
+  .image-preview {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .fa-times-circle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+
+  .buttons {
+    background-color: #2da0a8;
+    border: 1px solid transparent;
+  }
+  .buttons:active {
+    background-color: #2da0a8 !important ;/* Keep the same color when button is clicked */
 }

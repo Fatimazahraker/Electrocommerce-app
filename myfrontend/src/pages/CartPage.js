@@ -1,11 +1,13 @@
-import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useState } from "react";
 import { Alert, Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./CartPage.css";
+import CheckoutForm from "../components/CheckoutForm";
 import { useIncreaseCartProductMutation, useDecreaseCartProductMutation, useRemoveFromCartMutation } from "../services/appApi";
-//import CheckoutForm from "../components/CheckoutForm";
+import "./CartPage.css";
 
-//const stripePromise = loadStripe("your_stripe_publishable_key");
+const stripePromise = loadStripe("pk_test_51PJL4fRuSjTGMt3JpgIUlPV8HMvIFWpTqH3o68MK32PNC4zTx5njQibPSvScIGm9JhhiT3EGlXGAAAN8kAkFhvLR00yMu0hIZZ");
 
 function CartPage() {
     const user = useSelector((state) => state.user);
@@ -15,6 +17,7 @@ function CartPage() {
     const [increaseCart] = useIncreaseCartProductMutation();
     const [decreaseCart] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
+    const [paying, setPaying] = useState(false);
 
     function handleDecrease(product) {
         const quantity = user.cart.count;
@@ -25,12 +28,18 @@ function CartPage() {
     return (
         <Container style={{ minHeight: "95vh" }} className="cart-container">
             <Row>
-                <Col md={4}>
+                <Col>
                     <h1 className="pt-2 h3">Shopping cart</h1>
-                    {cart.length == 0 ? <Alert variant="info">Shopping cart is empty. Add products to your cart</Alert> : <div>Payment here</div>}
+                    {cart.length == 0 ? (
+                        <Alert variant="info">Shopping cart is empty. Add products to your cart</Alert>
+                    ) : (
+                        <Elements stripe={stripePromise}>
+                            <CheckoutForm />
+                        </Elements>
+                    )}
                 </Col>
-                <Col md={8}>
-                    {cart.length > 0 && (
+                {cart.length > 0 && (
+                    <Col md={5}>
                         <>
                             <Table responsive="sm" className="cart-table">
                                 <thead>
@@ -43,13 +52,13 @@ function CartPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* loop througt cart products */}
+                                    {/* loop through cart products */}
                                     {cart.map((item) => (
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>
-                                                { isLoading && <i className="fa fa-times" style={{ marginRight: 10, cursor: 'pointer' }} onClick={() => removeFromCart({ productId: item._id, price: item.price, userId: user._id })}></i>}
-                                                <img src={item.pictures[0].url} style={{ width: 100, height: 100, objectFit: 'cover' }} />
+                                                {!isLoading && <i className="fa fa-times" style={{ marginRight: 10, cursor: "pointer" }} onClick={() => removeFromCart({ productId: item._id, price: item.price, userId: user._id })}></i>}
+                                                <img src={item.pictures[0].url} style={{ width: 100, height: 100, objectFit: "cover" }} />
                                             </td>
                                             <td>${item.price}</td>
                                             <td>
@@ -65,12 +74,11 @@ function CartPage() {
                                 </tbody>
                             </Table>
                             <div>
-                                <h3 className="'h4 pt-4">Total: ${user.cart.total}</h3>
+                                <h3 className="h4 pt-4">Total: ${user.cart.total}</h3>
                             </div>
                         </>
-                    )}
-                </Col>
-                
+                    </Col>
+                )}
             </Row>
         </Container>
     );

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const port = process.env.PORT || 5000;
 
 // Require the connection to the MongoDB database
@@ -29,6 +31,22 @@ app.use(express.json()); // Parse JSON bodies
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
 app.use('/images', imageRoutes);
+
+app.post('/create-payment', async(req, res)=> {
+    const {amount} = req.body;
+    console.log(amount);
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd',
+        payment_method_types: ['card']
+      });
+      res.status(200).json(paymentIntent)
+    } catch (e) {
+      console.log(e.message);
+      res.status(400).json(e.message);
+     }
+  })
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
