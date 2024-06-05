@@ -14,6 +14,8 @@ import CategoryPage from "./pages/CategoryPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CartPage from "./pages/CartPage";
 import ReactSwitch from "react-switch";
+import OrdersPage from "./pages/OrdersPage";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 
@@ -46,12 +48,20 @@ function App() {
             {user && (
                           <>
                               <Route path="/cart" element={<CartPage />} />
-                              
+                              <Route path="/orders" element={<OrdersPage />} />
                           </>
                       )}
+            
+            {user && user.isAdmin && (
+                        <>
+                            <Route path="/admin" element={<AdminDashboard />} />
+                    
+                        </>
+                    )}
 
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/category/:category" element={<CategoryPage />} />
+           
             
             <Route path="/new-product" element={<NewProduct />} />
 

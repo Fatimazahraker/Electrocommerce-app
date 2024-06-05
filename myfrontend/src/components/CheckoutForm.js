@@ -52,12 +52,15 @@ function CheckoutForm() {
 
             if (paymentIntent && paymentIntent.status === "succeeded") {
                 const orderResponse = await createOrder({ userId: user._id, cart: user.cart, address, country }).unwrap();
-
+                console.log(orderResponse);
                 if (orderResponse) {
                     setAlertMessage(`Payment ${paymentIntent.status}`);
                     setTimeout(() => {
-                        //navigate("/orders");
+                        navigate("/orders");
+                        console.log("i am here");
                     }, 3000);
+                } else {
+                    setAlertMessage("Order creation failed. Please try again.");
                 }
             } else {
                 setAlertMessage("Payment failed. Please try again.");

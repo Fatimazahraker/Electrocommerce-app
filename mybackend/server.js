@@ -21,6 +21,7 @@ const User = require('./models/User');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/ProductRoutes');
 const imageRoutes = require('./routes/imageRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 // Middleware setup
 app.use(cors()); // Enable CORS for all routes
@@ -30,6 +31,7 @@ app.use(express.json()); // Parse JSON bodies
 // Register routes
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
 app.use('/images', imageRoutes);
 
 app.post('/create-payment', async(req, res)=> {
@@ -41,6 +43,7 @@ app.post('/create-payment', async(req, res)=> {
         currency: 'usd',
         payment_method_types: ['card']
       });
+      console.log(amount);
       res.status(200).json(paymentIntent)
     } catch (e) {
       console.log(e.message);
