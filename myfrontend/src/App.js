@@ -16,7 +16,7 @@ import CartPage from "./pages/CartPage";
 import ReactSwitch from "react-switch";
 import OrdersPage from "./pages/OrdersPage";
 import AdminDashboard from "./pages/AdminDashboard";
-
+import EditProductPage from "./pages/EditProductPage";
 
 
 export const ThemeContext = createContext(null);
@@ -55,7 +55,7 @@ function App() {
             {user && user.isAdmin && (
                         <>
                             <Route path="/admin" element={<AdminDashboard />} />
-                    
+                            <Route path="/product/:id/edit" element={<EditProductPage />} />
                         </>
                     )}
 
