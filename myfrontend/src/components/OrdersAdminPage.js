@@ -3,8 +3,7 @@ import { Badge, Button, Modal, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import Loading from "./Loading";
-
-/*import Pagination from "./Pagination";*/
+import Pagination from "./Pagination";
 
 function OrdersAdminPage() {
     const [orders, setOrders] = useState([]);
@@ -83,32 +82,42 @@ function OrdersAdminPage() {
     }
 
     return (
-       
+        <>
             <Table responsive striped bordered hover>
                 <thead>
                     <tr>
-                        <th>user id</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Total</th>
+                        <th>#</th>
+                        <th>Client Name</th>
+                        <th>Items</th>
+                        <th>Order Total</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map((order) => (
-                        <tr>
-                            <td>{order._id}</td>
-                            <td>
-                                <Badge bg={`${order.status == "processing" ? "warning" : "success"}`} text="white">
-                                    {order.status}
-                                </Badge>
-                            </td>
-                            <td>{order.date}</td>
-
-                            <td>${order.total}</td>
-                        </tr>
-                    ))}
+                    <Pagination data={orders} RenderComponent={TableRow} pageLimit={1} dataLimit={10} tablePagination={true} />
                 </tbody>
             </Table>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Order details</Modal.Title>
+                </Modal.Header>
+                {orderToShow.map((order) => (
+                    <div className="order-details__container d-flex justify-content-around py-2">
+                        <img src={order.pictures[0].url} style={{ maxWidth: 100, height: 100, objectFit: "cover" }} />
+                        <p>
+                            <span>{order.count} x </span> {order.name}
+                        </p>
+                        <p>Price: ${Number(order.price) * order.count}</p>
+                    </div>
+                ))}
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 
